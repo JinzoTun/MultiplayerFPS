@@ -5,6 +5,9 @@ extends Node
 @onready var player_name_input = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/PlayerName
 @onready var main_camera = $MainCamera
 @onready var hud = $CanvasLayer/HUD
+@onready var main_menu_music = $MainMenuMusic
+@onready var mute_button = $CanvasLayer/MuteButton
+
 
 @onready var hp = $CanvasLayer/HUD/HP
 @onready var hp_text = $CanvasLayer/HUD/HP/HPText
@@ -17,10 +20,14 @@ const PORT = 1234
 var enet_peer = ENetMultiplayerPeer.new()
 var upnp = UPNP.new()
 
+func _ready():
+	main_menu_music.play()
+	
 func _on_host_button_pressed():
-
+	main_menu_music.stop()
 	main_menu.hide()
 	hud.show()
+	mute_button.hide()
 	death_count.text = "deaths : "
 	kill_count.text = "kills : "
 	enet_peer.create_server(PORT)
@@ -32,8 +39,9 @@ func _on_host_button_pressed():
 	upnp_setup()
 
 func _on_join_button_pressed():
-
+	main_menu_music.stop()
 	main_menu.hide()
+	mute_button.hide()
 	hud.show()
 	death_count.text = "deaths : "
 	kill_count.text = "kills : "
@@ -48,6 +56,7 @@ func add_player(peer_id):
 	add_child(player)
 	
 	if player.is_multiplayer_authority():
+		
 		player.health_changed.connect(update_health_bar)
 		player.death_count_changed.connect(update_death_count)
 		player.kill_count_changed.connect(update_kill_count)
@@ -71,7 +80,7 @@ func upnp_setup():
 		"UPNP Port Mapping Failed! Error %s" % map_result)
 	
 	print("Success! Join Address: %s:%d" % [upnp.query_external_address(), PORT])
-	
+
 	
 func update_health_bar(health_value):
 		hp.value = health_value
@@ -97,3 +106,11 @@ func _on_multiplayer_spawner_spawned(node):
 		node.death_count_changed.connect(update_death_count)
 		node.kill_count_changed.connect(update_kill_count)
 
+
+
+func _on_quit_pressed():
+	get_tree().quit()
+
+
+func _on_button_pressed():
+	main_menu_music.stop()

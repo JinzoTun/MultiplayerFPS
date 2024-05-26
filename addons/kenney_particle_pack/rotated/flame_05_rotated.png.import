@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1f34xtia0kof"
 path.s3tc="res://.godot/imported/flame_05_rotated.png-4f7db43db56a63ea24f41df7b1265024.s3tc.ctex"
+path.etc2="res://.godot/imported/flame_05_rotated.png-4f7db43db56a63ea24f41df7b1265024.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/kenney_particle_pack/rotated/flame_05_rotated.png"
-dest_files=["res://.godot/imported/flame_05_rotated.png-4f7db43db56a63ea24f41df7b1265024.s3tc.ctex"]
+dest_files=["res://.godot/imported/flame_05_rotated.png-4f7db43db56a63ea24f41df7b1265024.s3tc.ctex", "res://.godot/imported/flame_05_rotated.png-4f7db43db56a63ea24f41df7b1265024.etc2.ctex"]
 
 [params]
 
